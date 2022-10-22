@@ -40,16 +40,26 @@ class Triangle:
             print("Треугольник не существует")
             self.change_side()
 
-
+# Добавить проверку прямоугольнисти
 class RightAngled(Triangle):
     def __init__(self, a, b, c):
         super().__init__(a, b, c)
+        self.__rcheck()
         self.area = self.__area_calculating()
 
-    def __area_calculating(self):
-        p = self.perimeter() * 0.5
+    def __rcheck(self):
         a, b, c = self.a, self.b, self.c
-        return sqrt(p * (p-a) * (p-b) * (p-c))
+        if (a * a + b * b == c * c) or (c * c + b * b == a * a) or (a * a + c * c == b * b):
+            print("Треугольник является прямоугольным")
+        else:
+            print("Прямоугольник не является прямоугольным")
+            self.change_side()
+
+    def __area_calculating(self):
+        a, b, c = self.a, self.b, self.c
+        a = min(a, b)
+        b = min(b, c)
+        return a * b / 2
 
 
 if __name__ == '__main__':

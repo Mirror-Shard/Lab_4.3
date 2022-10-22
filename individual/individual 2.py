@@ -7,6 +7,7 @@
 функциями вычисления у в зависимости от входного параметра .
 """
 from abc import ABC, abstractmethod
+import math
 
 
 class Function(ABC):
@@ -17,29 +18,32 @@ class Function(ABC):
         self.y = 0
 
     @abstractmethod
-    def calculation(self):
+    def calculate(self):
         pass
 
 
 class Ellipse(Function):
     def __init__(self, a, b, x):
         super().__init__(a, b, x)
-        self.y = self.calculation()
+        self.y = self.calculate()
 
-    def calculation(self):
+    def calculate(self):
         a, b, x = self.a, self.b, self.x
-        return (b / a) * x
+        y = (b * math.sqrt(a-x) * math.sqrt(a+x)) / a
+        print(y)
+        return y
 
 
 class Hyperbola(Function):
     def __init__(self, a, b, x):
         super().__init__(a, b, x)
-        self.y = self.calculation()
+        self.y = self.calculate()
 
-    def calculation(self):
+    def calculate(self):
         a, b, x = self.a, self.b, self.x
-        y = (b / a) * x
-        return y, -y
+        y = (b * math.sqrt(a-x) * math.sqrt(a+x)) / a
+        print(y)
+        return y
 
 
 if __name__ == '__main__':
@@ -50,4 +54,4 @@ if __name__ == '__main__':
         E = Ellipse(a, b, x)
         H = Hyperbola(a, b, x)
         print(f"Для эллипса y равен {E.y}")
-        print(f"Для гиперболы y равен {H.y}")
+        print(f"Для гиперболы y равен {H.y}i")
